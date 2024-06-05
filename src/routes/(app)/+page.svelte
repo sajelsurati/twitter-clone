@@ -35,7 +35,7 @@
                 loading = true;
                 let url = '';
                 if (imgFile) {
-                    const storageRef = ref(storage,'posts/userId/${imgFile.name}')
+                    const storageRef = ref(storage,'posts/${data.userId}/${imgFile.name}')
                     const result = uploadBytes(storageRef,imgFile);
                     let url = await getDownloadURL(result.ref);
                 }
@@ -62,9 +62,15 @@
 </div>
 {#if data.posts.length > 0}
     {#each data.posts as post}
-        <TweetCard/>
+        <TweetCard
+        avatar={post.profiltPic}
+        email = {post.email}
+        img = {post.img}
+        name = {post.name}
+        tweet = {post.tweet}
+        id = {post.id}
+        likes = {post.likes}/>
     {/each}
 {:else}
 no data
 {/if}
-<TweetCard/>
